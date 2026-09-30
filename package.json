@@ -1,0 +1,20 @@
+{
+  "name": "hm-cafe-frontend",
+  "version": "1.0.0",
+  "description": "HM Cafe Smart Table Reservation & Queue Management System Frontend UI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "frontend",
+    "table-reservation",
+    "ui"
+  ],
+  "author": "HM Cafe Team",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

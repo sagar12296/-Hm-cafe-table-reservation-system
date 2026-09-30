@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HM Café | Smart Table Reservation & Live Queue Management</title>
+    <meta name="description"
+        content="Commercial-grade smart table reservation & real-time queue management platform for HM Café. Final year BCA project demonstration.">
+
+    <!-- External Fonts & Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- Ambient Floating Orbs for Luxury Depth -->
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="brand-logo">
+                <i class="fas fa-mug-hot"></i>
+                <span>HM Café</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About Project</a></li>
+                <li><a href="#reservation" class="nav-link">Reservation</a></li>
+                <li><a href="#queue" class="nav-link">Live Queue</a></li>
+                <li><a href="#floorplan" class="nav-link">Floor Plan</a></li>
+                <li><a href="#smartscreen" class="nav-link">Smart Screen</a></li>
+                <li><a href="#analytics" class="nav-link">Analytics</a></li>
+                <li><a href="#admin" class="nav-link">Admin Portal</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#reservation" class="btn btn-primary btn-sm"><i class="fas fa-utensils"></i> Book Table</a>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Mobile Navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+
+
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge badge-primary"><i class="fas fa-bolt"></i> Smart Dining Experience</div>
+                    <h1>Reserve Your Table <span>Instantly</span></h1>
+                    <p>Skip the wait. Book your favorite table in seconds and receive real-time live queue updates
+                        directly on your smartphone.</p>
+
+                    <div class="hero-cta">
+                        <a href="#reservation" class="btn btn-primary btn-lg"><i class="fas fa-calendar-check"></i>
+                            Reserve Table</a>
+                        <button class="btn btn-secondary btn-lg" onclick="openJoinQueueModal()"><i
+                                class="fas fa-list-ol"></i> Join Waitlist</button>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-visual-card">
+                        <img src="assets/cafe_hero.png" alt="HM Café Interior Ambiance">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Counters Bar -->
+            <div class="counter-bar">
+                <div class="glass-card counter-card">
+                    <div class="counter-icon"><i class="fas fa-users-line"></i></div>
+                    <div class="counter-value" id="counter-queue" data-target="5">5</div>
+                    <div class="counter-label">Live Queue Count</div>
+                </div>
+
+                <div class="glass-card counter-card">
+                    <div class="counter-icon"><i class="fas fa-chair"></i></div>
+                    <div class="counter-value" id="counter-tables" data-target="10">10</div>
+                    <div class="counter-label">Available Tables</div>
+                </div>
+
+                <div class="glass-card counter-card">
+                    <div class="counter-icon"><i class="fas fa-clock"></i></div>
+                    <div class="counter-value" id="counter-wait" data-target="18">18</div>
+                    <div class="counter-label">Avg. Wait Time (mins)</div>
+                </div>
+
+                <div class="glass-card counter-card">
+                    <div class="counter-icon"><i class="fas fa-calendar-day"></i></div>
+                    <div class="counter-value" id="counter-today" data-target="34">34</div>
+                    <div class="counter-label">Today's Reservations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Project Section -->
+    <section id="about" class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary">Academic Collaboration</div>
+                <h2>Interdisciplinary BCA Final Year Project</h2>
+                <p>Bridging Hotel Management operational efficiency with modern Information Technology SaaS solution.
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <!-- HM Contribution Card -->
+                <div class="glass-card about-card">
+                    <div class="about-card-header">
+                        <div class="about-icon"><i class="fas fa-hotel"></i></div>
+                        <div>
+                            <h3>Hotel Management Contribution</h3>
+                            <p style="font-size:0.85rem; color:var(--text-muted);">Operational Standards & Spatial
+                                Planning</p>
+                        </div>
+                    </div>
+
+                    <ul class="contribution-list">
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Café Layout Planning &
+                                Optimal Table Spacing</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Guest Flow Pattern
+                                Analysis during Peak Hours</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Peak Hour Dining Load &
+                                Turnover Optimization</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Smart Screen Display
+                                Specification with Queue Numbers</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Efficient Table
+                                Utilization & Turnaround Metrics</span></li>
+                    </ul>
+                </div>
+
+                <!-- IT Contribution Card -->
+                <div class="glass-card about-card">
+                    <div class="about-card-header">
+                        <div class="about-icon" style="background:var(--primary-light);"><i
+                                class="fas fa-laptop-code"></i></div>
+                        <div>
+                            <h3>Information Technology Contribution</h3>
+                            <p style="font-size:0.85rem; color:var(--text-muted);">Software Engineering & SaaS Platform
+                            </p>
+                        </div>
+                    </div>
+
+                    <ul class="contribution-list">
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Online Real-time Table
+                                Reservation Platform</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Real-time Live Queue
+                                Management System</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Live Floor Plan Status
+                                Updates & Interactive Map</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Instant Toast & Receipt
+                                Notification Engine</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>Comprehensive Admin
+                                Analytics Dashboard</span></li>
+                        <li class="contribution-item"><i class="fas fa-check-circle"></i> <span>LocalStorage Database
+                                Integration & Mobile Responsiveness</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Smart Reservation Page -->
+    <section id="reservation" class="section-padding">
+        <div class="container reservation-container">
+            <div class="section-header">
+                <div class="badge badge-primary">Instant Booking</div>
+                <h2>Smart Table Reservation</h2>
+                <p>Select your preferences and lock in your dining slot instantly.</p>
+            </div>
+
+            <div class="glass-card reservation-card">
+                <form id="reservation-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" id="res-name" class="form-input" placeholder="e.g. Rahul Sharma"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" id="res-phone" class="form-input" placeholder="+91 9876543210" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" id="res-email" class="form-input" placeholder="rahul@example.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Guests *</label>
+                            <select id="res-guests" class="form-select">
+                                <option value="2">2 Guests (Couple Table)</option>
+                                <option value="4" selected>4 Guests (Standard Family)</option>
+                                <option value="6">6 Guests (Group)</option>
+                                <option value="8">8 Guests (VIP Booth)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Date *</label>
+                            <input type="date" id="res-date" class="form-input" value="2026-07-22" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Preferred Time Slot *</label>
+                            <select id="res-time" class="form-select">
+                                <option value="11:30 AM">11:30 AM (Lunch)</option>
+                                <option value="12:30 PM">12:30 PM (Peak Lunch)</option>
+                                <option value="01:30 PM">01:30 PM (Late Lunch)</option>
+                                <option value="06:30 PM">06:30 PM (Evening Snacks)</option>
+                                <option value="07:30 PM" selected>07:30 PM (Dinner)</option>
+                                <option value="08:30 PM">08:30 PM (Peak Dinner)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Table Preference Zone</label>
+                            <div class="zone-selector">
+                                <label class="zone-option">
+                                    <input type="radio" name="res-zone" value="Indoor" checked>
+                                    <div class="zone-box"><i class="fas fa-building"></i> Indoor</div>
+                                </label>
+                                <label class="zone-option">
+                                    <input type="radio" name="res-zone" value="Window">
+                                    <div class="zone-box"><i class="fas fa-window-maximize"></i> Window View</div>
+                                </label>
+                                <label class="zone-option">
+                                    <input type="radio" name="res-zone" value="Outdoor">
+                                    <div class="zone-box"><i class="fas fa-tree"></i> Outdoor Garden</div>
+                                </label>
+                                <label class="zone-option">
+                                    <input type="radio" name="res-zone" value="VIP">
+                                    <div class="zone-box"><i class="fas fa-crown"></i> VIP Booth</div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Pre-select Specific Table (Optional)</label>
+                            <select id="res-table-select" class="form-select">
+                                <option value="">Auto-Assign Best Available Table</option>
+                                <option value="1">Table 01 (Indoor - 2 Seats)</option>
+                                <option value="3">Table 03 (Indoor - 4 Seats)</option>
+                                <option value="7">Table 07 (Window View - 2 Seats)</option>
+                                <option value="13">Table 13 (Outdoor Garden - 4 Seats)</option>
+                                <option value="20">Table 20 (VIP Lounge - 8 Seats)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Special Requests / Occasion</label>
+                            <textarea id="res-requests" class="form-textarea" rows="3"
+                                placeholder="Birthday celebration, high chair required, quiet corner..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 28px;">
+                        <i class="fas fa-lock"></i> Confirm & Generate QR Ticket
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Live Queue Management Page -->
+    <section id="queue" class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-warning"><i class="fas fa-users"></i> Live Waiting Line</div>
+                <h2>Live Queue Management</h2>
+                <p>Track your position transparently without standing physically in line.</p>
+            </div>
+
+            <div class="queue-grid">
+                <!-- Status Box -->
+                <div class="glass-card live-queue-status-card">
+                    <div>
+                        <div class="badge badge-warning" style="margin-bottom:12px;">Active Queue Stream</div>
+                        <h3>HM Café Queue Status</h3>
+                        <p style="color:var(--text-secondary); margin-top:6px;">Live queue update synchronized across
+                            all screens.</p>
+                    </div>
+
+                    <div class="queue-metric-display">
+                        <div class="queue-metric-box">
+                            <div class="queue-metric-number" id="current-serving-no">Q-101</div>
+                            <div style="font-size:0.85rem; color:var(--text-muted);">Currently Serving</div>
+                        </div>
+
+                        <div class="queue-metric-box">
+                            <div class="queue-metric-number" id="total-waiting-count">5</div>
+                            <div style="font-size:0.85rem; color:var(--text-muted);">In Waiting Queue</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display:flex; justify-content:space-between; font-size:0.9rem; font-weight:600;">
+                            <span>Queue Progression</span>
+                            <span>60% Capacity</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex; gap:12px; margin-top:24px;">
+                        <button class="btn btn-primary" onclick="openJoinQueueModal()" style="flex:1;"><i
+                                class="fas fa-user-plus"></i> Join Waitlist</button>
+                        <button class="btn btn-secondary" onclick="callNextInQueue()" style="flex:1;"><i
+                                class="fas fa-bullhorn"></i> Call Next Customer</button>
+                    </div>
+                </div>
+
+                <!-- Recent Queue Stream Cards -->
+                <div>
+                    <h3 style="font-family:var(--font-heading); margin-bottom:16px;">Live Waitlist Stream</h3>
+                    <div id="queue-cards-container">
+                        <!-- JS populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Smart Café Layout (20 Tables Interactive Floor Plan) -->
+    <section id="floorplan" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary"><i class="fas fa-map-marked-alt"></i> Interactive Floor Plan</div>
+                <h2>Smart Café Layout</h2>
+                <p>Real-time visual map of all 20 tables. Click any table to inspect guest details or update
+                    availability status.</p>
+            </div>
+
+            <div class="floor-plan-controls">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-section="all">All Sections (20)</button>
+                    <button class="tab-btn" data-section="indoor">Indoor (6)</button>
+                    <button class="tab-btn" data-section="window">Window (6)</button>
+                    <button class="tab-btn" data-section="outdoor">Outdoor (5)</button>
+                    <button class="tab-btn" data-section="vip">VIP Booths (3)</button>
+                </div>
+
+                <ul class="legend-list">
+                    <li class="legend-item"><span class="dot dot-available"></span> Available</li>
+                    <li class="legend-item"><span class="dot dot-occupied"></span> Occupied</li>
+                    <li class="legend-item"><span class="dot dot-reserved"></span> Reserved Soon</li>
+                    <li class="legend-item"><span class="dot dot-selected"></span> Selected</li>
+                </ul>
+            </div>
+
+            <div class="floor-plan-grid" id="floor-plan-grid">
+                <!-- Dynamically populated 20 table cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Smart Screen Display (Airport Board View) -->
+    <section id="smartscreen" class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary"><i class="fas fa-desktop"></i> Digital Display Board</div>
+                <h2>Smart Screen Display</h2>
+                <p>Designed for large wall screens inside the café entrance (airport information board style).</p>
+            </div>
+
+            <div class="smart-screen-container">
+                <div class="smart-screen-header">
+                    <div class="smart-screen-title">
+                        <i class="fas fa-mug-hot" style="color:#00FFCC;"></i> HM CAFÉ LIVE WAITING BOARD
+                    </div>
+                    <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+                        <button class="btn btn-sm btn-outline" id="voice-toggle-btn" onclick="toggleVoiceAnnouncements()" style="border-color:#00FFCC; color:#00FFCC; font-size:0.8rem;">
+                            <i class="fas fa-volume-up"></i> Voice Broadcast: ON
+                        </button>
+                        <div class="live-time-ticker" id="smart-board-clock">10:50:00 AM</div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0, 255, 204, 0.08); padding: 10px 16px; border-radius: 8px; margin-bottom: 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #00FFCC; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-bullhorn" style="color:#00FFCC;"></i>
+                    <span>LIVE BROADCAST • WATCH DISPLAY FOR YOUR QUEUE NUMBER • AUDIO SPEECH ANNOUNCEMENT ENABLED</span>
+                </div>
+
+                <table class="airport-board-table">
+                    <thead>
+                        <tr>
+                            <th>Queue ID</th>
+                            <th>Customer Name</th>
+                            <th>Table Number</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="smart-screen-tbody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Peak Time Analytics -->
+    <section id="analytics" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary"><i class="fas fa-chart-line"></i> Business Intelligence</div>
+                <h2>Peak Time Analytics</h2>
+                <p>Data-driven insights to maximize table utilization and minimize customer wait time.</p>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="glass-card chart-card">
+                    <div class="chart-card-header">
+                        <h4>Reservations Per Hour</h4>
+                        <span class="badge badge-info">Today</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chart-hourly"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-card">
+                    <div class="chart-card-header">
+                        <h4>Weekly Footfall & Busy Hours</h4>
+                        <span class="badge badge-warning">Weekly</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chart-busy"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-card">
+                    <div class="chart-card-header">
+                        <h4>Table Occupancy Breakdown</h4>
+                        <span class="badge badge-success">Live Ratio</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chart-occupancy"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card chart-card">
+                    <div class="chart-card-header">
+                        <h4>Revenue Estimation Trend</h4>
+                        <span class="badge badge-primary">Monthly</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chart-revenue"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Admin Dashboard -->
+    <section id="admin" class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary"><i class="fas fa-user-shield"></i> Management Portal</div>
+                <h2>Admin Dashboard</h2>
+                <p>Comprehensive backend control for staff, receptionists, and HM managers.</p>
+            </div>
+
+            <div class="glass-card admin-wrapper" style="padding: 24px;">
+                <!-- Sidebar -->
+                <div class="admin-sidebar">
+                    <ul class="admin-nav-list">
+                        <li class="admin-nav-item active"><button onclick="filterAdminTable('All')"><i
+                                    class="fas fa-th-large"></i> All Roster</button></li>
+                        <li class="admin-nav-item"><button onclick="filterAdminTable('Confirmed')"><i
+                                    class="fas fa-calendar-check"></i> Confirmed</button></li>
+                        <li class="admin-nav-item"><button onclick="filterAdminTable('Seated')"><i
+                                    class="fas fa-chair"></i> Seated Guests</button></li>
+                        <li class="admin-nav-item"><button onclick="resetPresentationData()"><i class="fas fa-undo"></i>
+                                Reset Demo</button></li>
+                    </ul>
+                </div>
+
+                <!-- Admin Main View -->
+                <div class="admin-main">
+                    <div class="admin-topbar">
+                        <h3 style="font-family:var(--font-heading);">Active Bookings & Guest Roster</h3>
+                        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                            <input type="text" id="admin-search-input" class="form-input"
+                                placeholder="Search name, phone, ID..." oninput="handleAdminSearch(this.value)"
+                                style="padding:6px 12px; font-size:0.85rem; width:200px;">
+                            <button class="btn btn-secondary btn-sm" onclick="renderAdminDashboard()"><i
+                                    class="fas fa-sync"></i> Refresh</button>
+                            <button class="btn btn-primary btn-sm" onclick="exportAdminRosterCSV()"><i
+                                    class="fas fa-file-csv"></i> Export CSV</button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Guest Details</th>
+                                    <th>Date & Time</th>
+                                    <th>Assigned Table</th>
+                                    <th>Party</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-reservations-tbody">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Features Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary">Platform Capabilities</div>
+                <h2>Core Features</h2>
+                <p>Built to commercial SaaS application standards.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h4>Real-Time Reservation</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Instant table confirmation with
+                        auto-matching seat engine.</p>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-stream"></i></div>
+                    <h4>Live Queue Tracking</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Live status updates & accurate waiting
+                        time estimation.</p>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-map"></i></div>
+                    <h4>Table Availability Map</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Interactive 20-table visual floor plan
+                        with color-coded status.</p>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-area"></i></div>
+                    <h4>Peak Time Analysis</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Chart.js powered business intelligence
+                        dashboard.</p>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <h4>Smart Notifications</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Instant feedback toasts & animated receipt
+                        QR passes.</p>
+                </div>
+
+                <div class="glass-card feature-card">
+                    <div class="feature-icon"><i class="fas fa-tv"></i></div>
+                    <h4>Digital Screen Display</h4>
+                    <p style="font-size:0.9rem; color:var(--text-secondary);">Airport-style digital public queue board
+                        with real-time ticker.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Testimonials -->
+    <section class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary">Guest Feedback</div>
+                <h2>What Our Diners Say</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="glass-card testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-style:italic; color:var(--text-secondary);">"The live queue feature is a lifesaver! I
+                        tracked my position while shopping nearby and walked in right when our table was called."</p>
+                    <div style="font-weight:700; font-family:var(--font-heading);">— Neha Kapoor</div>
+                </div>
+
+                <div class="glass-card testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-style:italic; color:var(--text-secondary);">"Booking our favorite window table for an
+                        anniversary dinner took literally 10 seconds. The QR pass receipt is super elegant."</p>
+                    <div style="font-weight:700; font-family:var(--font-heading);">— Vikram Sharma</div>
+                </div>
+
+                <div class="glass-card testimonial-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p style="font-style:italic; color:var(--text-secondary);">"As a café manager, the interactive floor
+                        plan and analytics give us 100% control over peak weekend dining rushes."</p>
+                    <div style="font-weight:700; font-family:var(--font-heading);">— HM Cafe Operations Manager</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. FAQ Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary">Got Questions?</div>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question"><span>How do I reserve a table online?</span> <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Navigate to the Smart Reservation section, choose your date, time slot, guest count, and
+                            table zone, then click Confirm. A QR pass ticket will be instantly generated for you.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can I cancel or modify my booking?</span> <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Yes! You can contact reception or present your Reservation ID to staff to adjust your
+                            reservation or cancel without any penalty.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question"><span>How is the estimated queue waiting time calculated?</span> <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Our smart system measures average table turnover time (approx 8 minutes per table) multiplied
+                            by your position in the waiting line to provide live, reliable estimates.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question"><span>Can I select a specific table number?</span> <i
+                            class="fas fa-chevron-down"></i></button>
+                    <div class="faq-answer">
+                        <p>Absolutely. Check our Interactive Floor Plan map to see real-time green available tables and
+                            select your favorite slot directly during reservation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. Contact Page -->
+    <section id="contact" class="section-padding" style="background: var(--bg-main);">
+        <div class="container">
+            <div class="section-header">
+                <div class="badge badge-primary">Get In Touch</div>
+                <h2>Contact & Location</h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="glass-card" style="padding:40px;">
+                    <h3 style="font-family:var(--font-heading); margin-bottom:20px;">Send Us a Message</h3>
+                    <form
+                        onsubmit="event.preventDefault(); showToast('Message sent! We will contact you shortly.', 'success'); this.reset();">
+                        <div class="form-group" style="margin-bottom:16px;">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom:16px;">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom:20px;">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-textarea" rows="4" placeholder="Your inquiry..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="glass-card"
+                    style="padding:40px; display:flex; flex-direction:column; justify-content:space-between;">
+                    <div>
+                        <h3 style="font-family:var(--font-heading); margin-bottom:20px;">HM Café Campus Location</h3>
+                        <div class="map-placeholder">
+                            <i class="fas fa-map-marker-alt" style="font-size:2.5rem; color:#00FFCC;"></i>
+                            <p style="font-weight:700;">HM Café Block, University Campus</p>
+                            <p style="font-size:0.85rem; opacity:0.8;">Interactive Campus Map Integration</p>
+                        </div>
+                    </div>
+
+                    <div
+                        style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:16px; font-size:0.9rem;">
+                        <div>
+                            <strong><i class="fas fa-phone"></i> Phone:</strong>
+                            <p style="color:var(--text-secondary);">+91 98765 43210</p>
+                        </div>
+                        <div>
+                            <strong><i class="fas fa-envelope"></i> Email:</strong>
+                            <p style="color:var(--text-secondary);">info@hmcafe.edu</p>
+                        </div>
+                        <div>
+                            <strong><i class="fas fa-clock"></i> Hours:</strong>
+                            <p style="color:var(--text-secondary);">8:00 AM - 10:00 PM</p>
+                        </div>
+                        <div>
+                            <strong><i class="fas fa-share-alt"></i> Social:</strong>
+                            <p style="color:var(--text-secondary);">@hmcafe_official</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 13. Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>HM Café System</h4>
+                    <p style="font-size:0.95rem; line-height:1.6; opacity:0.85;">A joint BCA Final Year project uniting
+                        Hotel Management operations with modern IT cloud software engineering.</p>
+                </div>
+
+                <div class="footer-links-column">
+                    <h5>Navigation</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Project</a></li>
+                        <li><a href="#reservation">Reservation</a></li>
+                        <li><a href="#floorplan">Floor Plan</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h5>Modules</h5>
+                    <ul>
+                        <li><a href="#queue">Live Queue</a></li>
+                        <li><a href="#smartscreen">Smart Screen Board</a></li>
+                        <li><a href="#analytics">Analytics Dashboard</a></li>
+                        <li><a href="#admin">Admin Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h5>Legal</h5>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">BCA Project Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>© 2026 HM Café Smart System. All Rights Reserved.</div>
+                <div>Developed by BCA Final Year Team</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Modal Container for Receipts & Table Details -->
+    <div id="modal-container"></div>
+
+    <!-- Back to Top Floating Button -->
+    <button class="back-to-top" id="back-to-top" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Main JavaScript Logic -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
